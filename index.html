@@ -236,7 +236,7 @@
             </div>
             <div class="flex items-center gap-1.5 text-slate-400">
               <i data-lucide="clock" class="w-3.5 h-3.5 flex-shrink-0"></i>
-              <span>Live Kembali Segera</span>
+              <span>Live (2-4 Hari)</span>
             </div>
           </div>
         </div>
@@ -329,8 +329,8 @@
             <i data-lucide="clock" class="w-3.5 h-3.5"></i>
           </div>
         </div>
-        <div class="mt-2 text-2xl font-black text-pink-600">~15 - 30 Menit</div>
-        <p class="text-xs text-slate-500 mt-0.5">Sedang dalam proses deployment</p>
+        <div class="mt-2 text-2xl font-black text-pink-600">2 - 4 Hari</div>
+        <p class="text-xs text-slate-500 mt-0.5">Perbaikan & optimasi menyeluruh</p>
       </div>
 
       <!-- Box 3 -->
@@ -498,7 +498,7 @@
       } catch (err) {
         // Jika masih timeout / error
         alertBox.className = 'text-xs px-4 py-2.5 rounded-xl border bg-rose-500/20 border-rose-400/30 text-rose-200 block';
-        alertBox.innerHTML = '⏳ <strong>Server Masih Dalam Perbaikan:</strong> Server utama belum selesai restart sepenuhnya. Ilham masih memproses perbaikan ini. Mohon tunggu beberapa menit lagi yaa!';
+        alertBox.innerHTML = '⏳ <strong>Server Masih Dalam Perbaikan:</strong> Server utama masih dalam proses perbaikan menyeluruh oleh Ilham (estimasi 2-4 hari). Mohon ditunggu yaa!';
       } finally {
         btnIcon.classList.remove('animate-spin');
         btnText.textContent = 'Cek Status Website Sekarang';
