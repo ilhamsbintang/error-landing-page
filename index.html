@@ -210,28 +210,28 @@
               <i data-lucide="cpu" class="w-4 h-4"></i>
               Progres Pemulihan Server oleh Ilham:
             </span>
-            <span id="progress-percent" class="text-white font-mono font-bold">85%</span>
+            <span id="progress-percent" class="text-pink-300 font-bold bg-pink-500/20 px-3 py-1 rounded-full border border-pink-400/30">diagnosa bug</span>
           </div>
           
           <!-- Progress Track -->
           <div class="w-full bg-white/10 h-3 rounded-full overflow-hidden p-0.5">
-            <div id="progress-bar" class="h-full bg-gradient-to-r from-pink-500 via-rose-500 to-pink-400 rounded-full transition-all duration-1000 w-[85%] relative">
+            <div id="progress-bar" class="h-full bg-gradient-to-r from-pink-500 via-rose-500 to-pink-400 rounded-full transition-all duration-1000 w-[25%] relative">
               <span class="absolute inset-0 bg-white/20 animate-pulse"></span>
             </div>
           </div>
 
           <!-- Step Indicators -->
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 text-[11px] text-slate-300">
-            <div class="flex items-center gap-1.5 text-emerald-400">
-              <i data-lucide="check-circle-2" class="w-3.5 h-3.5 flex-shrink-0"></i>
+            <div class="flex items-center gap-1.5 text-pink-300 font-bold">
+              <i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin flex-shrink-0"></i>
               <span>Diagnosa Bug</span>
             </div>
-            <div class="flex items-center gap-1.5 text-emerald-400">
-              <i data-lucide="check-circle-2" class="w-3.5 h-3.5 flex-shrink-0"></i>
+            <div class="flex items-center gap-1.5 text-slate-400">
+              <i data-lucide="clock" class="w-3.5 h-3.5 flex-shrink-0"></i>
               <span>Backup Database</span>
             </div>
-            <div class="flex items-center gap-1.5 text-pink-300 font-semibold">
-              <i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin flex-shrink-0"></i>
+            <div class="flex items-center gap-1.5 text-slate-400">
+              <i data-lucide="clock" class="w-3.5 h-3.5 flex-shrink-0"></i>
               <span>Deploy Fix & Patch</span>
             </div>
             <div class="flex items-center gap-1.5 text-slate-400">
@@ -472,37 +472,29 @@
     }
 
     // Check Live Server Status
-    async function checkServerStatus() {
+    function checkServerStatus() {
       const btnIcon = document.getElementById('btn-check-icon');
       const btnText = document.getElementById('btn-check-text');
       const alertBox = document.getElementById('ping-alert');
 
       btnIcon.classList.add('animate-spin');
-      btnText.textContent = 'Memeriksa koneksi server...';
-      alertBox.className = 'hidden';
+      btnText.textContent = 'Memeriksa status...';
 
-      try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 4000);
-
-        // Ping domain utama (no-cors untuk mendeteksi apakah server merespon)
-        await fetch('https://n3.ilhamandsekar.site', {
-          mode: 'no-cors',
-          signal: controller.signal
-        });
-        clearTimeout(timeoutId);
-
-        // Jika berhasil merespon
-        alertBox.className = 'text-xs px-4 py-2.5 rounded-xl border bg-emerald-500/20 border-emerald-400/30 text-emerald-200 block';
-        alertBox.innerHTML = '🎉 <strong>Koneksi Terhubung!</strong> Server website tampak sudah mulai merespon kembali. Silakan coba buka <a href="https://n3.ilhamandsekar.site" class="underline font-bold text-white">n3.ilhamandsekar.site</a>.';
-      } catch (err) {
-        // Jika masih timeout / error
-        alertBox.className = 'text-xs px-4 py-2.5 rounded-xl border bg-rose-500/20 border-rose-400/30 text-rose-200 block';
-        alertBox.innerHTML = '⏳ <strong>Server Masih Dalam Perbaikan:</strong> Server utama masih dalam proses perbaikan menyeluruh oleh Ilham (estimasi 2-4 hari). Mohon ditunggu yaa!';
-      } finally {
+      setTimeout(() => {
         btnIcon.classList.remove('animate-spin');
         btnText.textContent = 'Cek Status Website Sekarang';
-      }
+        alertBox.className = 'text-xs sm:text-sm px-4 py-3 rounded-2xl border bg-rose-500/20 border-rose-400/40 text-rose-200 block space-y-1 animate-fadeIn';
+        alertBox.innerHTML = `
+          <div class="flex items-center gap-2 font-bold text-rose-100">
+            <i data-lucide="wrench" class="w-4 h-4 text-pink-400 flex-shrink-0"></i>
+            <span>Website Sedang Diperbaiki</span>
+          </div>
+          <p class="text-xs text-rose-200/90 leading-relaxed">
+            Website saat ini sedang dalam proses perbaikan oleh Ilham (tahap <strong>diagnosa bug</strong>). Estimasi selesai 2-4 hari. Data dan streak belajar kamu tetap aman!
+          </p>
+        `;
+        if (window.lucide) lucide.createIcons();
+      }, 350);
     }
   </script>
 </body>
